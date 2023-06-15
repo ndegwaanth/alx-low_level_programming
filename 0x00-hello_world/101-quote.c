@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <unistd.h>
 /**
  * main - every c program should xecuted from the main
  * Description: this program display the line to the standaard error
