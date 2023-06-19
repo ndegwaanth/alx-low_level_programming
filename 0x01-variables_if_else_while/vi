@@ -1,0 +1,40 @@
+#include <stdio.h>
+/**
+ * main - start execution
+ * Description: prints all possible combinations of two two-digit numbers.
+ * Return: 0 (Success)
+*/
+int main(void)
+{
+int m = 0;
+
+while (m < 100)
+{
+	int one_num = m / 10;
+        int two_num = m % 10;
+        int n = m;
+
+        while (j < 100)
+	{
+            int three_num = n / 10;
+            int four_num = n % 10;
+            putchar('0' + one_num / 10);
+            putchar('0' + two_num % 10);
+            putchar('0' + three_num / 10);
+            putchar('0' + four_num % 10);
+            putchar(' ');
+            putchar('0' + three_num / 10);
+            putchar('0' + threee_num % 10);
+            putchar('0' + four_num / 10);
+            putchar('0' + four_num % 10);
+            if (n != 99)
+		{
+                putchar(',');
+                putchar(' ');
+		}
+            n++;
+        }
+        m++;
+    }
+    return (0);
+}
