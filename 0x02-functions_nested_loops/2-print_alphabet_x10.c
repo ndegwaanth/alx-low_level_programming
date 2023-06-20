@@ -19,4 +19,5 @@ while (z < 10)
 	_putchar('\n');
 }
 z++;
+return (0);
 }
