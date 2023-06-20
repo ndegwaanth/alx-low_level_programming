@@ -1,20 +1,22 @@
 #include "main.h"
 /**
- * main - Start execution
+ * main - start execution
  * Description: prints the alphabet, in lowercase
  * Return: 0(Success)
  */
+/* this function retun nothing */
+void print_alphabet(void)
+{
+char  alphabet;
+
+for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
+	_putchar(alphabet);
+
+_putchar('\n');
+}
 int main(void)
 {
-	void print_alphabet(void)
-	{
-		char  alphabet;
-
-		for (alphabet = 'a'; alphabet <= 'z'; alphabet++)
-		{
-			_putchar(alphabet);
-		}
-	}
-_putchar('\n');
-return (0);
+	print_alphabet();
+	return (0);
+}
 }
