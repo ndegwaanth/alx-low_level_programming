@@ -1,6 +1,7 @@
 #include "main.h"
 /**
  * times_table - display the 9 times time table
+ * @n,@m,@p: check the characters
  */
 void time_table(void)
 {
