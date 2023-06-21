@@ -2,6 +2,7 @@
 
 /**
  * jack_baue - print every minute of the day starting from 00:00 to  * 23:59
+ * Description: display jack_bauer minute
  */
 void jack_bauer(void)
 {
