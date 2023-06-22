@@ -1,9 +1,10 @@
 #include "main.h"
+
 /**
- *  mul - multiply two integers
+ *  print_most_numbers - multiply two integers
  *  Return: void
  */
-int mul(int a, int b)
+void print_most_numbers(void)
 {
 	char m;
 
