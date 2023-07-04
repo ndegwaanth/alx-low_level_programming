@@ -21,7 +21,6 @@ void print_diagsums(int *a, int size)
 		a = a + size;
 	}
 	a = a - size;
-	
 	for (m = 0; m < size; m++)
 	{
 		addition = addition + a[m];
