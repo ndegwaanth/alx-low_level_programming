@@ -12,18 +12,19 @@ int **alloc_grid(int width, int height)
 	int sum = width = height;
 
 	m = n = 0;
-	if (sum <= 0)
+	if (sum < 0)
 	{
 		return (NULL);
 	}
-	pointer = (int **)malloc(sizeof(int *) * height);
+	pointer = (int **)malloc(sizeof(int *) * (height + 1));
 	if (pointer == NULL)
 	{
 		return (NULL);
 	}
+	free(pointer);
 	for (; m < height; m++)
 	{
-		pointer[m] = (int *)(malloc(sizeof(int) * width));
+		pointer[m] = (int *)(malloc(sizeof(int) * (width + 1)));
 		if (pointer[m] == NULL)
 		{
 			m--;
@@ -33,7 +34,7 @@ int **alloc_grid(int width, int height)
 			} m++;
 			free(pointer);
 			return (NULL);
-        	}
+		}
 	}
 	for (m = 0; m < height; m++)
 	{
@@ -41,7 +42,7 @@ int **alloc_grid(int width, int height)
 		while (n < width)
 		{
 			pointer[m][n] = 0;
-			n++; 
+			n++;
 		}
 	}
 	return (pointer);

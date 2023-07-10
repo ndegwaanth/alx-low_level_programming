@@ -12,11 +12,10 @@ char *str_concat(char *s1, char *s2)
 	int m, n, p, q, sum;
 	char *pointer;
 
-	m = 0;
-	n = 0;
 	p = q = 0;
 	if (s1 != NULL)
 	{
+		m = 0;
 		while (s1[m + 1] != '\0')
 		{
 			p = p + 1;
@@ -24,20 +23,28 @@ char *str_concat(char *s1, char *s2)
 	}
 	else if (s2 != NULL)
 	{
-		while (s2[m + 1] != '\0')
+		m = 0;
+		while (s2[m++] != '\0')
 		{
 			q++;
 		}
 	}
 	sum = q + p;
-	pointer = malloc(sizeof(char) * (sum++));
-	for (; n < p; n++)
+	pointer = (char *)malloc(sizeof(char) * (sum++));
+	if (pointer == NULL)
 	{
-		pointer[n] = s1[n];
+		return (NULL);
 	}
+	for (m = 0; m < p; m++)
+	{
+		pointer[m] = s1[m];
+	}
+	n = 0;
 	while (n < q)
 	{
-		pointer[n] = s2[n];
+		pointer[m] = s2[n];
+		n++;
+		m++;
 	}
 	pointer[sum] = '\0';
 	return (pointer);
