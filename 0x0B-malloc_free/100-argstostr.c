@@ -20,13 +20,13 @@ char *argstostr(int ac, char **av)
 	for (m = 0; m < ac; m++)
 	{
 		pointer = av[m];
-	}
-	n = 0;
-	while (pointer[n++])
-	{
+		n = 0;
+		while (pointer[n++])
+		{
+			sum++;
+		}
 		sum++;
 	}
-	sum++;
 	string = (char *)malloc(sizeof(char) * (sum + 1));
 	if (string == NULL)
 	{
