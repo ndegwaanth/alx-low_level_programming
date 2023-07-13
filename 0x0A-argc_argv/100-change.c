@@ -1,40 +1,37 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
 /**
- * main - display minimum number of coins to make changes
+ * main - print the minimum number of coins
  * @argc: number of arguments
  * @argv: array of arguments
  * Return: 0 (success)
- */
+*/
 int main(int argc, char *argv[])
 {
-	int m, n, p;
-	int coins[5] = {25, 10, 5, 2, 1};
+	int cent[5] = {25, 10, 5, 2, 1};
+	int digit, m, outcome;
 
-	if (argc != 1)
+	if (argc != 2)
 	{
 		printf("Error\n");
 		return (1);
 	}
-	else if (argc < 0)
+	digit = atoi(argv[1]);
+	outcome = 0;
+	if (digit < 0)
 	{
 		printf("0\n");
+		return (0);
 	}
-	m = atoi(argv[1]);
-	n = 0;
-	p = 0;
-
-	while (n < 5 && m >= 0)
+	for (m = 0; m < 5 && digit >= 0; m++)
 	{
-		while (m >= coins[n])
+		while (digit >= cent[m])
 		{
-			p = p + 1;
-			m = m - coins[n];
+			outcome = outcome + 1;
+			digit = digit - cent[m];
 		}
-		p++;
-	} n++;
-	printf("%d\n", p);
+	}
+	printf("%d\n", outcome);
 	return (0);
 }
-
-
