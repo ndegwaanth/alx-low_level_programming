@@ -10,9 +10,8 @@
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	char *space;
-	unsigned int m, k, p, q;
+	unsigned int m = 0, k = 0, p = 0, q = 0;
 
-	m = n = p = q = 0;
 	for (; s1 && s1[p];)
 	{
 		p++;
@@ -29,17 +28,23 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	{
 		space = malloc(sizeof(char) * (p + q + 1));
 	}
-	if (space == NULL)
+	if (!space)
 		return (NULL);
+
+
 	while (m < p)
 	{
 		space[m] = s1[m];
 		m++;
 	}
 	while (n < q && m < (p + n))
-		space[m++] = s1[k++];
-	while (n >= q && m < (p + q))
+	{
 		space[m++] = s2[k++];
+	}
+	while (n >= q && m < (p + q))
+	{
+		space[m++] = s1[k++];
+	}
 	space[m] = '\0';
 	return (space);
 }
