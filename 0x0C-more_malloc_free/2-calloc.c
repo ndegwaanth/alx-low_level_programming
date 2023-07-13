@@ -15,6 +15,7 @@ char *_fill_memory(char *str, char c, unsigned int m)
 	while (n < m)
 	{
 		str[n] = c;
+		n++;
 	}
 	return (str);
 }
@@ -29,9 +30,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	char *string;
 
 	if (nmemb == 0 || size == 0)
-	{
 		return (NULL);
-	}
 
 	string = malloc(size * nmemb);
 	if (string == NULL)
