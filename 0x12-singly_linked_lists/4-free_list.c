@@ -1,7 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "lists.h"
-#include <string.h>
 /**
  * free_list - frees a list_t
  * @head: pointer
