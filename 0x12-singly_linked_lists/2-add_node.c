@@ -26,7 +26,6 @@ list_t *add_node(list_t **head, const char *str)
 	storage->len = size;
 	storage->next = (*head);
 	(*head) = storage;
-	
+
 	return (*head);
 }
-
