@@ -15,7 +15,9 @@ unsigned int binary_to_uint(const char *b)
 
 	for (m = length - 1; m >= 0; m--)
 	{
-		if (b[m] == '1')
+		if (b[m] == 'e')
+			return (0);
+		if (b[m] == '1' && b[m] != 'e')
 		{
 			sum += multiply;
 		}
