@@ -8,11 +8,10 @@
 void print_binary(unsigned long int n)
 {
 	/*a 32 bit*/
-	int bit = sizeof(int) * 3;
-	int address = 1 << (bit - 1);
-	int m;
+	unsigned int bit = sizeof(int) * 3;
+	unsigned int address = 1UL << (bit - 1);
 
-	for (m = 0; m < bit; m++)
+	for (; address;)
 	{
 		if (n & address)
 		{
