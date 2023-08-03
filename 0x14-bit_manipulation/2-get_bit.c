@@ -9,7 +9,7 @@
 int get_bit(unsigned long int n, unsigned int index)
 {
 	int bitmask;
-	unsigned value = 0;
+	unsigned int value = 0;
 
 	if (index < value || index > sizeof(char) * 10)
 	{
