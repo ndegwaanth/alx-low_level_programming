@@ -21,6 +21,6 @@ unsigned int binary_to_uint(const char *b)
 		}
 		multiply *= 2;
 	}
-	
+
 	return (sum);
 }
