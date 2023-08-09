@@ -1,1 +1,1 @@
-the more pointer in this file
+This simple shell is created by Anthony and Brian
