@@ -2,10 +2,5 @@ CC = gcc
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 
-all: school
-school: $(OBJ)
+all: $(OBJ)
 	$(CC) $(OBJ) -o school
-
-%.o: %.c
-	$(CC) -c $< -o $@
-
