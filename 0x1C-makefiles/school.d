@@ -1,0 +1,1 @@
+school.o: school.c
