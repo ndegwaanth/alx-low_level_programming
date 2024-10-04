@@ -26,13 +26,13 @@ int advanced_recursive_binary(int *array, size_t low, size_t high, int s_value)
 	if (array[medium] == s_value)
 	{
 		if (array[medium - 1] == s_value)
-			return advanced_recursive_binary(array, low, medium, s_value);
+			return (advanced_recursive_binary(array, low, medium, s_value));
 		return (medium);
 	}
 	if (array[medium] < s_value)
-		return advanced_recursive_binary(array, medium + 1, high, s_value);
+		return (advanced_recursive_binary(array, medium + 1, high, s_value));
 	if (array[medium] > s_value)
-		return advanced_recursive_binary(array, low, medium - 1, s_value);
+		return (advanced_recursive_binary(array, low, medium - 1, s_value));
 	return (-1);
 }
 /**
