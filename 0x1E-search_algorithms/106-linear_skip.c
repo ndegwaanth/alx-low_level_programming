@@ -1,44 +1,78 @@
 #include "search_algos.h"
 
 /**
- * linear_skip - Searches for a value in a sorted skip list of integers
- * @list: Pointer to the head of the skip list
- * @value: The value to search for
+ * create_skiplist - Creates a skip list from an array of integers
+ * @array: The array of integers to create the skip list from
+ * @size: The size of the array
  *
- * Return: Pointer to the first node where the value is located, or NULL
+ * Return: A pointer to the head of the created skip list
  */
-skiplist_t *linear_skip(skiplist_t *list, int value)
+skiplist_t *create_skiplist(int *array, size_t size)
 {
-	skiplist_t *prev = list, *curr = list;
+	skiplist_t *head = NULL, *node = NULL, *express = NULL;
+	size_t i;
 
-	if (!list)
+	if (!array || size == 0)
 		return (NULL);
 
-	/* Traverse the express lane */
-	while (curr->express && curr->express->n < value)
+	for (i = 0; i < size; i++)
 	{
-		prev = curr;
-		curr = curr->express;
-		printf("Value checked at index [%lu] = [%d]\n", curr->index, curr->n);
+		node = malloc(sizeof(skiplist_t));
+		if (!node)
+			return (NULL);
+
+		node->n = array[i];
+		node->index = i;
+		node->next = head;
+		node->express = NULL;
+		head = node;
+
+		/* Set express lane */
+		if (i % (size_t)(sqrt(size)) == 0)
+		{
+			if (express)
+				express->express = node;
+			express = node;
+		}
 	}
 
-	/* When express lane ends or current express node has larger or equal value */
-	if (curr->express)
-	{
-		prev = curr;
-		curr = curr->express;
-	}
+	/* Reverse the list to maintain correct order */
+	head = reverse_list(head);
+	return (head);
+}
 
-	/* Linear search between two nodes */
-	printf("Value found between indexes [%lu] and [%lu]\n",
-		prev->index, curr->index);
-	while (prev != curr->next)
-	{
-		printf("Value checked at index [%lu] = [%d]\n", prev->index, prev->n);
-		if (prev->n == value)
-			return (prev);
-		prev = prev->next;
-	}
+/**
+ * reverse_list - Reverses a linked list
+ * @head: Pointer to the head of the list
+ *
+ * Return: Pointer to the new head of the reversed list
+ */
+skiplist_t *reverse_list(skiplist_t *head)
+{
+	skiplist_t *prev = NULL, *next = NULL;
 
-	return (NULL);
+	while (head)
+	{
+		next = head->next;
+		head->next = prev;
+		prev = head;
+		head = next;
+	}
+	return (prev);
+}
+
+/**
+ * free_skiplist - Frees a skip list
+ * @list: Pointer to the head of the list
+ */
+void free_skiplist(skiplist_t *list)
+{
+	skiplist_t *temp;
+
+	while (list)
+	{
+		temp = list;
+		list = list->next;
+		free(temp);
+	}
 }
