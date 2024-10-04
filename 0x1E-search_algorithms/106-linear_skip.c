@@ -1,78 +1,72 @@
 #include "search_algos.h"
+#include <math.h>
+#include <stdio.h>
 
 /**
- * create_skiplist - Creates a skip list from an array of integers
- * @array: The array of integers to create the skip list from
- * @size: The size of the array
- *
- * Return: A pointer to the head of the created skip list
+ * print_value_checked - Prints the value checked in the skip list
+ * @node: The current node being checked
  */
-skiplist_t *create_skiplist(int *array, size_t size)
+void print_value_checked(skiplist_t *node)
 {
-	skiplist_t *head = NULL, *node = NULL, *express = NULL;
-	size_t i;
+	if (node)
+		printf("Value checked at index [%lu] = [%d]\n", node->index, node->n);
+}
 
-	if (!array || size == 0)
+/**
+ * linear_list_search - Performs a linear search in the linked list
+ * @current: Pointer to the current node
+ * @value: Value to search for
+ *
+ * Return: Pointer to the node containing the value, or NULL if not found
+ */
+skiplist_t *linear_list_search(skiplist_t *current, int value)
+{
+	while (current && current->n < value)
+	{
+		print_value_checked(current);
+		current = current->next;
+	}
+
+	if (current)
+	{
+		print_value_checked(current);
+		if (current->n == value)
+			return (current);
+	}
+
+	return (NULL);
+}
+
+/**
+ * linear_skip - Searches for a value in a sorted skip list
+ * @list: Pointer to the head of the skip list to search in
+ * @value: Value to search for
+ *
+ * Return: Pointer to the first node where value located, or NULL if not found
+ */
+skiplist_t *linear_skip(skiplist_t *list, int value)
+{
+	skiplist_t *express_node = list;
+
+	if (!list)
 		return (NULL);
 
-	for (i = 0; i < size; i++)
+	/* Step 1: Find the range in the express lane */
+	while (express_node->express && express_node->express->n < value)
 	{
-		node = malloc(sizeof(skiplist_t));
-		if (!node)
-			return (NULL);
-
-		node->n = array[i];
-		node->index = i;
-		node->next = head;
-		node->express = NULL;
-		head = node;
-
-		/* Set express lane */
-		if (i % (size_t)(sqrt(size)) == 0)
-		{
-			if (express)
-				express->express = node;
-			express = node;
-		}
+		print_value_checked(express_node);
+		express_node = express_node->express;
 	}
 
-	/* Reverse the list to maintain correct order */
-	head = reverse_list(head);
-	return (head);
-}
+	/* Print the last express node checked */
+	print_value_checked(express_node);
+	if (express_node->express)
+		printf("Value found between indexes [%lu] and [%lu]\n",
+		       express_node->index, express_node->express->index);
+	else
+		printf("Value found between indexes [%lu] and [%lu]\n",
+		       express_node->index, express_node->index + 1);
 
-/**
- * reverse_list - Reverses a linked list
- * @head: Pointer to the head of the list
- *
- * Return: Pointer to the new head of the reversed list
- */
-skiplist_t *reverse_list(skiplist_t *head)
-{
-	skiplist_t *prev = NULL, *next = NULL;
-
-	while (head)
-	{
-		next = head->next;
-		head->next = prev;
-		prev = head;
-		head = next;
-	}
-	return (prev);
-}
-
-/**
- * free_skiplist - Frees a skip list
- * @list: Pointer to the head of the list
- */
-void free_skiplist(skiplist_t *list)
-{
-	skiplist_t *temp;
-
-	while (list)
-	{
-		temp = list;
-		list = list->next;
-		free(temp);
-	}
+	/* Step 2: Linear search in the normal linked list */
+	return (linear_list_search(express_node, value));
 }
